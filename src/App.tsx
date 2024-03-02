@@ -1,5 +1,11 @@
+import RoutesPage from "./Routes/RoutesPage";
+
 const App = () => {
-  return <div>App</div>;
+  return (
+    <>
+      <RoutesPage />
+    </>
+  );
 };
 
 export default App;
