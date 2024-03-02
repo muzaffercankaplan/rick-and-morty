@@ -1,9 +1,13 @@
 import { GetFetchData } from "../../Services/api";
+import { LocationSchema } from "../../Types/type";
 
 const LocationPages = () => {
-  const { data: data, error, loading } = GetFetchData<any>({ url: "location" });
+  const {
+    data: locationData,
+    error,
+    loading,
+  } = GetFetchData<LocationSchema>({ url: "location" });
 
-  console.log("data", data);
   return <div></div>;
 };
 
