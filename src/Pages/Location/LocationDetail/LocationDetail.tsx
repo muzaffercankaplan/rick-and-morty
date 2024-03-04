@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Card from "../../../Components/Card/Card";
+import NoRecord from "../../../Components/NoRecord/NoRecord";
 import Pagination from "../../../Components/Pagination/Pagination";
 import { convertUrlsToIds } from "../../../GeneralFunction/Function";
 import { GetFetchData } from "../../../Services/api";
@@ -104,6 +105,7 @@ const LocationDetail = () => {
           />
         </div>
       )}
+      {characterPaginationList.length < 1 && <NoRecord />}
     </div>
   );
 };
