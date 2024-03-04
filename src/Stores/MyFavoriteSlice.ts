@@ -4,7 +4,11 @@ export interface MyFavoriteSlice {
   favorites: number[];
 }
 
-const initialState: MyFavoriteSlice = { favorites: [3, 2] };
+const initialState: MyFavoriteSlice = {
+  favorites: localStorage.getItem("favorite")
+    ? JSON.parse(localStorage.getItem("favorite") || "[]")
+    : [],
+};
 
 const favoriteSlice = createSlice({
   name: "favorite",
@@ -17,6 +21,7 @@ const favoriteSlice = createSlice({
       if (addElemenIndex < 0) {
         const assembledItem = action.payload;
         state.favorites.push(assembledItem);
+        localStorage.setItem("favorite", JSON.stringify(state.favorites));
       }
     },
 
@@ -25,10 +30,12 @@ const favoriteSlice = createSlice({
         (item) => item !== action.payload
       );
       state.favorites = updateFavorite;
+      localStorage.setItem("favorite", JSON.stringify(updateFavorite));
     },
 
     clearFavorite: (state) => {
       state.favorites = [];
+      localStorage.removeItem("favorite");
     },
   },
 });

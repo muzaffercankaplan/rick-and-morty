@@ -1,0 +1,56 @@
+@import "../Variables/Variable.scss";
+
+.dashboard_container {
+  background-color: $bgColor;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  color: $textColor;
+  position: relative;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  background-color: $navBgColor;
+  display: flex;
+  padding: 20px 100px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid $textHoverColor;
+  font-size: $mFont;
+  z-index: 10;
+}
+
+.navbar_links {
+  a {
+    color: $textColor;
+    text-decoration: none;
+    margin-left: 20px;
+  }
+
+  .active {
+    color: $textHoverColor;
+  }
+
+  &:hover {
+    color: $textHoverColor;
+    transition-duration: 1s;
+  }
+}
+
+.outlet {
+  padding: 20px 100px 0 100px;
+  height: 100%;
+}
+
+@media (max-width: $breakpointTablet) {
+  .navbar {
+    padding: 20px 10px;
+    font-size: $sFont;
+  }
+
+  .outlet {
+    padding: 20px 10px;
+  }
+}

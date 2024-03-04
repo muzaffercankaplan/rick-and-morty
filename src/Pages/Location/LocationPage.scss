@@ -1,0 +1,49 @@
+@import "../../Components//Variables/Variable.scss";
+
+.locaitonPage {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  position: relative;
+}
+
+.cardDesign {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.statusFilter {
+  margin: 0 10px 10px 0;
+  border: 1px solid $textHoverColor;
+  padding: 5px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+
+.locationDetail {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  position: relative;
+}
+
+@media (max-width: $breakpointTablet) {
+  .cardDesign {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: $breakpointPhone) {
+  .cardDesign {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

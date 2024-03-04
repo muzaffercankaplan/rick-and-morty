@@ -10,14 +10,15 @@ export interface InfoSchema {
   prev: string | null;
 }
 
-interface LocationResultSchema {
+export interface LocationResultSchema {
   id: number;
   name: string;
   type: string;
-  dimension: string;
-  residents: string[];
+  dimension?: string;
+  residents?: string[];
   url: string;
   created: string;
+  status?: string;
 }
 
 export interface LocaitonDetailSchema {
@@ -43,6 +44,8 @@ export interface CharacterDetailSchema {
   episode: string[];
   url: string;
   created: string;
+  dimension?: string;
+  residents?: string[];
 }
 
 interface CharacterLocationInfo {

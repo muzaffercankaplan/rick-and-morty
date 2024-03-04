@@ -12,12 +12,12 @@ const RoutesPage = () => {
         {/* location and location detail page */}
         <Route path="/location">
           <Route index Component={LocationPages} />
-          <Route path=":locaitonId" Component={LocationDetail} />
+          <Route path=":id" Component={LocationDetail} />
         </Route>
         {/* location and location detail page */}
 
         {/* Character Detail page */}
-        <Route path="/character" Component={CharacterDetailPages} />
+        <Route path="/character/:id" Component={CharacterDetailPages} />
         {/* Character Detail page */}
 
         {/* MyFovarite page */}

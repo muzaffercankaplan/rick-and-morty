@@ -1,0 +1,38 @@
+@import "../Variables/Variable.scss";
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border: 1px solid $textColor;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: default;
+  transition-duration: 1s;
+
+  a {
+    color: $textHoverColor;
+    text-decoration: none;
+
+    &:hover {
+      color: #004059;
+      transition-duration: 1s;
+    }
+  }
+
+  div span {
+    color: $textColor;
+  }
+
+  div {
+    color: black;
+    text-transform: capitalize;
+  }
+
+  .isFavorite {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
