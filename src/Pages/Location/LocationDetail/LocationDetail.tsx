@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Card from "../../../Components/Card/Card";
 import Pagination from "../../../Components/Pagination/Pagination";
+import { convertUrlsToIds } from "../../../GeneralFunction/Function";
 import { GetFetchData } from "../../../Services/api";
 import { RootState } from "../../../Stores/store";
 import {
@@ -38,9 +39,6 @@ const LocationDetail = () => {
     error,
     loading,
   } = GetFetchData<LocationResultSchema>({ url: `location/${id}` });
-
-  const convertUrlsToIds = (urls: string[]) =>
-    urls.map((url: any) => parseInt(url.match(/\d+$/)[0]));
 
   const characterIdArray: number[] | undefined =
     singleLocation?.residents && convertUrlsToIds(singleLocation?.residents);
