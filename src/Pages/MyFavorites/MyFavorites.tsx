@@ -40,7 +40,10 @@ const MyFavorites = () => {
   };
 
   useEffect(() => {
-    if (favoritesArray?.length < 1) return;
+    if (favoritesArray?.length < 1) {
+      setCharacterList([]);
+      return;
+    }
     setLodaing(true);
     fetch(`https://rickandmortyapi.com/api/character/${favoritesArray}`)
       .then((response) => response.json())
@@ -55,16 +58,20 @@ const MyFavorites = () => {
     <div>
       {" "}
       <div>
-        {statusFilterArray.map((item) => (
-          <button
-            className="statusFilter"
-            onClick={() => handleClick(item)}
-            key={item}
-          >
-            {" "}
-            {item}{" "}
-          </button>
-        ))}
+        {statusFilterArray.map((item) =>
+          characterList.length > 0 || item !== "clear favorite list" ? (
+            <button
+              className="statusFilter"
+              onClick={() => handleClick(item)}
+              key={item}
+            >
+              {" "}
+              {item}{" "}
+            </button>
+          ) : (
+            ""
+          )
+        )}
       </div>
       <div>
         {loading ? (

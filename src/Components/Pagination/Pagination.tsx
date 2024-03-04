@@ -9,15 +9,15 @@ type Props = {
 const Pagination = ({ current, totalPage, changePage }: Props) => {
   return (
     <ul className="pagination">
-      <p onClick={() => current >= 2 && changePage(1)} className="arrow">
+      <div onClick={() => current >= 2 && changePage(1)} className="arrow">
         {"<<"}
-      </p>
-      <p
+      </div>
+      <div
         onClick={() => current >= 2 && changePage(current - 1)}
         className="arrow"
       >
         {"<"}
-      </p>
+      </div>
       {Array.from({ length: totalPage }).map((i, number) => {
         return (
           number < current + 2 &&
@@ -33,18 +33,18 @@ const Pagination = ({ current, totalPage, changePage }: Props) => {
           )
         );
       })}
-      <p
+      <div
         onClick={() => current != totalPage && changePage(current + 1)}
         className="arrow"
       >
         {">"}
-      </p>
-      <p
+      </div>
+      <div
         onClick={() => current != totalPage && changePage(totalPage)}
         className="arrow"
       >
         {">>"}
-      </p>
+      </div>
     </ul>
   );
 };

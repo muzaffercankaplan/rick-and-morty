@@ -9,6 +9,10 @@
   font-size: $mFont;
   gap: 10px;
 
+  .loadingText {
+    color: $textHoverColor;
+  }
+
   div {
     width: 20px;
     height: 20px;

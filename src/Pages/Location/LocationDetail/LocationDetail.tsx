@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Card from "../../../Components/Card/Card";
+import Loading from "../../../Components/Loading/Loading";
 import NoRecord from "../../../Components/NoRecord/NoRecord";
 import Pagination from "../../../Components/Pagination/Pagination";
 import { convertUrlsToIds } from "../../../GeneralFunction/Function";
@@ -30,6 +31,7 @@ const LocationDetail = () => {
   );
   const [status, setStatus] = useState<string>("All");
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [searchValue, setSearchValue] = useState<string>("");
 
   const changePage = (page: number) => {
     setCurrentPage(page);
@@ -61,13 +63,22 @@ const LocationDetail = () => {
     const value = characterList?.filter((character) =>
       status === "All" ? character : character.status === status
     );
-    setCharacterPaginationList(value);
-  }, [status, characterList.length]);
+
+    const spesificFilter = value.filter((item) =>
+      searchValue
+        ? item.name.toLocaleLowerCase().includes(searchValue) && item
+        : item
+    );
+
+    setCurrentPage(1);
+
+    setCharacterPaginationList(spesificFilter);
+  }, [status, characterList.length, searchValue]);
 
   return (
     <div className="locationDetail">
       <div>
-        {" "}
+        <p> {singleLocation?.name} </p>{" "}
         <div>
           {statusFilterArray.map((item) => (
             <button
@@ -82,13 +93,28 @@ const LocationDetail = () => {
               {item}{" "}
             </button>
           ))}
+          <input
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            placeholder="search character"
+          />
         </div>
-        <div className="cardDesign">
-          {characterPaginationList
-            ?.slice((currentPage - 1) * 20, currentPage * 20)
-            .map((item) => (
-              <Card favoritesArray={favoritesArray} types={2} value={item} />
-            ))}
+        <div>
+          {loading ? (
+            <Loading />
+          ) : (
+            <div className="cardDesign">
+              {characterPaginationList
+                ?.slice((currentPage - 1) * 20, currentPage * 20)
+                .map((item) => (
+                  <Card
+                    favoritesArray={favoritesArray}
+                    types={2}
+                    value={item}
+                  />
+                ))}
+            </div>
+          )}
         </div>
       </div>
       {characterPaginationList.length > 0 && (

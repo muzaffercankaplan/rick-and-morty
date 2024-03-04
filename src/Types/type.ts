@@ -19,6 +19,9 @@ export interface LocationResultSchema {
   url: string;
   created: string;
   status?: string;
+  image?: string;
+  species?: string;
+  gender?: string;
 }
 
 export interface LocaitonDetailSchema {
