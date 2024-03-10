@@ -11,7 +11,7 @@
 
 input {
   outline: none;
-  border: 1px solid $textHoverColor;
+  border: 1px solid $primaryColor;
   padding: 5px 10px;
   border-radius: 10px;
   margin: 0 0 10px 0;
@@ -25,11 +25,16 @@ input {
 
 .statusFilter {
   margin: 0 10px 10px 0;
-  border: 1px solid $textHoverColor;
+  border: 1px solid $primaryColor;
   padding: 5px 10px;
   border-radius: 10px;
   cursor: pointer;
   text-transform: capitalize;
+}
+
+.activeStatusFilter {
+  background: $primaryColor;
+  color: #ffffff;
 }
 
 .locationDetail {

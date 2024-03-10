@@ -5,6 +5,7 @@ import Card from "../../../Components/Card/Card";
 import Loading from "../../../Components/Loading/Loading";
 import NoRecord from "../../../Components/NoRecord/NoRecord";
 import Pagination from "../../../Components/Pagination/Pagination";
+import StatusFilter from "../../../Components/StatusFilter/StatusFilter";
 import { convertUrlsToIds } from "../../../GeneralFunction/Function";
 import { GetFetchData } from "../../../Services/api";
 import { RootState } from "../../../Stores/store";
@@ -13,8 +14,6 @@ import {
   LocationResultSchema,
 } from "../../../Types/type";
 import "../LocationPage.scss";
-
-type StatusFilter = string[];
 
 const LocationDetail = () => {
   const { id } = useParams();
@@ -57,8 +56,6 @@ const LocationDetail = () => {
       .catch((error) => console.error(error));
   }, [characterIdArray?.length]);
 
-  const statusFilterArray: StatusFilter = ["All", "Alive", "Dead", "unknown"];
-
   useEffect(() => {
     const value = characterList?.filter((character) =>
       status === "All" ? character : character.status === status
@@ -66,7 +63,9 @@ const LocationDetail = () => {
 
     const spesificFilter = value.filter((item) =>
       searchValue
-        ? item.name.toLocaleLowerCase().includes(searchValue) && item
+        ? item.name
+            .toLocaleLowerCase()
+            .includes(searchValue.toLocaleLowerCase()) && item
         : item
     );
 
@@ -75,28 +74,22 @@ const LocationDetail = () => {
     setCharacterPaginationList(spesificFilter);
   }, [status, characterList.length, searchValue]);
 
+  const handleClick = (item: string) => {
+    setCurrentPage(1);
+    setStatus(item);
+  };
+
   return (
     <div className="locationDetail">
       <div>
         <p> {singleLocation?.name} </p>{" "}
         <div>
-          {statusFilterArray.map((item) => (
-            <button
-              className="statusFilter"
-              onClick={() => {
-                setCurrentPage(1);
-                setStatus(item);
-              }}
-              key={item}
-            >
-              {" "}
-              {item}{" "}
-            </button>
-          ))}
-          <input
-            value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
-            placeholder="search character"
+          <StatusFilter
+            handleClick={handleClick}
+            setSearchValue={setSearchValue}
+            searchValue={searchValue}
+            type={"location"}
+            status={status}
           />
         </div>
         <div>

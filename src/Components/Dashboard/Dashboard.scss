@@ -17,7 +17,7 @@
   padding: 20px 100px;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid $textHoverColor;
+  border-bottom: 1px solid $primaryColor;
   font-size: $mFont;
   z-index: 10;
 }
@@ -30,17 +30,17 @@
   }
 
   .active {
-    color: $textHoverColor;
+    color: $primaryColor;
   }
 
   &:hover {
-    color: $textHoverColor;
+    color: $primaryColor;
     transition-duration: 1s;
   }
 }
 
 .outlet {
-  padding: 20px 100px 0 100px;
+  padding: 20px 100px 20px 100px;
   height: 100%;
 }
 

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Card from "../../Components/Card/Card";
 import Loading from "../../Components/Loading/Loading";
 import NoRecord from "../../Components/NoRecord/NoRecord";
+import StatusFilter from "../../Components/StatusFilter/StatusFilter";
 import { clearFavorite } from "../../Stores/MyFavoriteSlice";
 import { RootState } from "../../Stores/store";
 import { CharacterDetailSchema } from "../../Types/type";
@@ -17,14 +18,11 @@ const MyFavorites = () => {
   );
   const [status, setStatus] = useState<string>("All");
   const [loading, setLodaing] = useState(false);
+  const [searchValue, setSearchValue] = useState<string>("");
 
-  const statusFilterArray: string[] = [
-    "All",
-    "Alive",
-    "Dead",
-    "unknown",
-    "clear favorite list",
-  ];
+  const [characterFilteredList, setCharacterFilteredList] = useState<
+    CharacterDetailSchema[]
+  >([]);
 
   const favoritesArray = useSelector(
     (state: RootState) => state.favorite.favorites
@@ -54,51 +52,47 @@ const MyFavorites = () => {
       .catch((error) => setLodaing(false));
   }, [favoritesArray?.length]);
 
+  useEffect(() => {
+    const value = characterList?.filter((character) =>
+      status === "All" ? character : character.status === status
+    );
+
+    const spesificFilter = value.filter((item) =>
+      searchValue
+        ? item.name
+            .toLocaleLowerCase()
+            .includes(searchValue.toLocaleLowerCase()) && item
+        : item
+    );
+
+    setCharacterFilteredList(spesificFilter);
+  }, [status, searchValue, characterList?.length]);
+
   return (
-    <div>
+    <div style={{ paddingBottom: "20px" }}>
       {" "}
       <div>
-        {statusFilterArray.map((item) =>
-          characterList.length > 0 || item !== "clear favorite list" ? (
-            <button
-              className="statusFilter"
-              onClick={() => handleClick(item)}
-              key={item}
-            >
-              {" "}
-              {item}{" "}
-            </button>
-          ) : (
-            ""
-          )
-        )}
+        <StatusFilter
+          list={characterFilteredList}
+          handleClick={handleClick}
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+          type={"favorite"}
+          status={status}
+        />
       </div>
       <div>
         {loading ? (
           <Loading />
         ) : (
           <div className="cardDesign">
-            {characterList
-              ?.filter((character) =>
-                status === "All" ? character : character.status === status
-              )
-              .map((item) => (
-                <Card favoritesArray={favoritesArray} types={2} value={item} />
-              ))}
+            {characterFilteredList?.map((item) => (
+              <Card favoritesArray={favoritesArray} types={2} value={item} />
+            ))}
           </div>
         )}
-        {/* {characterList
-          ?.filter((character) =>
-            status === "All" ? character : character.status === status
-          )
-          .map((item) => (
-            <Card favoritesArray={favoritesArray} types={2} value={item} />
-          ))} */}
       </div>
-      {characterList?.filter((character) =>
-        status === "All" ? character : character.status === status
-      ).length < 1 &&
-        !loading && <NoRecord />}
+      {characterFilteredList?.length < 1 && !loading && <NoRecord />}
     </div>
   );
 };
