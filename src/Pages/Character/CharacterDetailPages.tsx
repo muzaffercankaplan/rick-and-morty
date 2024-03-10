@@ -36,7 +36,13 @@ const CharacterDetailPages = () => {
     await fetch(`https://rickandmortyapi.com/api/character?status=${status}`)
       .then((response) => response.json())
       .then((data) => {
-        setSameStatusList(data.results.slice(0, 9));
+        setSameStatusList(
+          data.results
+            .filter((item: CharacterDetailSchema) =>
+              id ? item.id != +id : item
+            )
+            .slice(0, 9)
+        );
       })
       .catch((e) => e);
   };
@@ -49,13 +55,19 @@ const CharacterDetailPages = () => {
       .then((data) => {
         const characterList =
           data.residents.length > 0
-            ? data?.residents.slice(0, 9)
+            ? data?.residents.slice(0, 10)
             : data.residents;
 
         const characterIdArray: number[] | undefined =
           characterList && convertUrlsToIds(characterList);
 
-        fetch(`https://rickandmortyapi.com/api/character/${characterIdArray}`)
+        const checkSameCharacter =
+          id &&
+          characterIdArray?.filter((item) => item != +id && item).slice(0, 9);
+
+        if (checkSameCharacter && checkSameCharacter?.length < 1) return;
+
+        fetch(`https://rickandmortyapi.com/api/character/${checkSameCharacter}`)
           .then((response) => response.json())
           .then((data) => {
             data?.length > 1

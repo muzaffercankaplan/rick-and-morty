@@ -30,6 +30,13 @@ input {
   border-radius: 10px;
   cursor: pointer;
   text-transform: capitalize;
+
+  &:disabled {
+    background-color: $textColor;
+    color: #fff;
+    border: 1px solid $textColor;
+    cursor: not-allowed;
+  }
 }
 
 .activeStatusFilter {

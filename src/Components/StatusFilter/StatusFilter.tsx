@@ -1,6 +1,7 @@
 import { CharacterDetailSchema } from "../../Types/type";
 
 type Props = {
+  isEmptyList?: boolean;
   handleClick: (item: string) => void;
   type: string;
   searchValue?: string;
@@ -10,6 +11,7 @@ type Props = {
 };
 
 const StatusFilter = ({
+  isEmptyList,
   handleClick,
   type,
   searchValue,
@@ -25,21 +27,17 @@ const StatusFilter = ({
 
   return (
     <div>
-      {statusFilterArray.map((item) =>
-        (list && list.length > 0) || item !== "clear favorite list" ? (
-          <button
-            className={`statusFilter ${
-              status === item && "activeStatusFilter"
-            }`}
-            onClick={() => handleClick(item)}
-            key={item}
-          >
-            {item}
-          </button>
-        ) : (
-          ""
-        )
-      )}
+      {statusFilterArray.map((item) => (
+        // (list && list.length > 0) || item !== "clear favorite list" ? (
+        <button
+          disabled={isEmptyList && item == "clear favorite list"}
+          className={`statusFilter ${status === item && "activeStatusFilter"}`}
+          onClick={() => handleClick(item)}
+          key={item}
+        >
+          {item}
+        </button>
+      ))}
       <input
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
