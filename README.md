@@ -14,27 +14,23 @@
 
 ## Character Detail Page
 
-![ExerciseDetail](./public/characterDetail.png)
+![Character Detail Page](./public/characterDetail.png)
 
 ## Favorite Page
 
-![ExerciseDetail](./public/favorite.png)
-
-## responsive
-
-![ExerciseDetail](./public/responsive.png)
+![Favorite Page](./public/favorite.png)
 
 ## Installation Instructions
 
 1.  Clone or download the project:
 
-        git clone https://github.com/muzaffercankaplan/Fitness-App.git
+        git clone https://github.com/muzaffercankaplan/rick-and-morty.git
 
 2.  Go to the project directory and install the requirements:
 
-        cd fitness-app
-        npm i
+        cd rick-and-morty
+        npm install && yarn add
 
 3.  Start the application:
 
-        npm start
+        npm start && yarn run start
