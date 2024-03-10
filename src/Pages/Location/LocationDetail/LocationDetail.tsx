@@ -98,7 +98,7 @@ const LocationDetail = () => {
           ) : (
             <div className="cardDesign">
               {characterPaginationList
-                ?.slice((currentPage - 1) * 20, currentPage * 20)
+                ?.slice((currentPage - 1) * 18, currentPage * 18)
                 .map((item) => (
                   <Card
                     favoritesArray={favoritesArray}
@@ -119,7 +119,7 @@ const LocationDetail = () => {
         >
           <Pagination
             current={currentPage}
-            totalPage={Math.ceil(characterPaginationList.length / 20)}
+            totalPage={Math.ceil(characterPaginationList.length / 18)}
             changePage={changePage}
           />
         </div>
