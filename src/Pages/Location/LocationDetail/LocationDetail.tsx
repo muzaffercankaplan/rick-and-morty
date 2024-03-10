@@ -124,7 +124,7 @@ const LocationDetail = () => {
           />
         </div>
       )}
-      {characterPaginationList.length < 1 && <NoRecord />}
+      {characterPaginationList.length < 1 && !loading && <NoRecord />}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 # Rick & Morty
 
-[Demo](https://rick-morty.pages.dev/)
+[Demo link](https://rick-morty.pages.dev/)
 
 ---
 
