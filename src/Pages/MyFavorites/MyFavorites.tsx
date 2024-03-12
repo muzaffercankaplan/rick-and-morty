@@ -74,7 +74,6 @@ const MyFavorites = () => {
       <div>
         <StatusFilter
           isEmptyList={characterList.length < 1}
-          list={characterFilteredList}
           handleClick={handleClick}
           searchValue={searchValue}
           setSearchValue={setSearchValue}

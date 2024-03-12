@@ -1,12 +1,9 @@
-import { CharacterDetailSchema } from "../../Types/type";
-
 type Props = {
   isEmptyList?: boolean;
   handleClick: (item: string) => void;
   type: string;
   searchValue?: string;
-  setSearchValue?: any;
-  list?: CharacterDetailSchema[];
+  setSearchValue?: (val: string) => void;
   status: string;
 };
 
@@ -16,7 +13,6 @@ const StatusFilter = ({
   type,
   searchValue,
   setSearchValue,
-  list,
   status,
 }: Props) => {
   const statusFilterArray: string[] = ["All", "Alive", "Dead", "unknown"];
@@ -40,7 +36,7 @@ const StatusFilter = ({
       ))}
       <input
         value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
+        onChange={(e) => setSearchValue && setSearchValue(e.target.value)}
         placeholder="search character"
       />
     </div>
